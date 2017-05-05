@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<style>
+.trSelected {
+    background-color: #ffcc00;
+}
+.rows {
+	background-color: lightyellow;
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    console.log('ready');
+	
+	var trSelect = '';
+	$('.rows').on('click', function(){
+		var el = $(this);
+		trSelect = el;
+		
+		$('#myTable tbody tr').removeClass('trSelected');
+		$('#myTable tbody tr').addClass('rows');
+		trSelect.removeClass('rows');
+		trSelect.addClass('trSelected');
+		
+		console.log(trSelect);
+		
+		$('.aaa').remove();
+		
+		
+		var cell_cnt = $('#myTable tr').length;
+		console.log(cell_cnt);
+		
+		var inputGroup1 = '<input id="username" type="text" value="doris" size="5" /\>'
+						+ '<button class="btn" data-clipboard-target="#username">'
+						+ '<img src="clippy.png" alt="Copy to clipboard" width="15">'
+						+ '</button>';
+						
+		var inputGroup2 = '<input id="devicename" type="text" value="dht11" size="5" /\>'
+						+ '<button class="btn" data-clipboard-target="#devicename">'
+						+ '<img src="clippy.png" alt="Copy to clipboard" width="15">'
+						+ '</button>';
+						
+		var inputGroup3 = '<input id="metric" type="text" value="temp" size="5" /\>'
+						+ '<button class="btn" data-clipboard-target="#metric">'
+						+ '<img src="clippy.png" alt="Copy to clipboard" width="15">'
+						+ '</button>';
+	
+		trSelect.after('<tr class="aaa" colspan="' + 3 + '"><th>metric name</th><th>metric desc</th><th>manual desc</th><th>metric topic</th><th>Example</th></tr>' 
+					 + '<tr class="aaa" colspan="' + 3 + '"><td>temp</td><td>temperature</td><td>after subscribe, will return temperature.</td><td>/doris/dht11/temp</td><td>Get ' + inputGroup1 + '\'s ' + inputGroup2 + 'Device\'s attribute ' + inputGroup3 + '</td></tr>');
+
+	});
+	
+	
+	new Clipboard('.btn');
+	
+	
+});
+</script>
+<title>hello!!</title>
+</head>
+<body>
+<!-- Target -->
+<input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
+
+<!-- Trigger -->
+<button class="btn" data-clipboard-target="#foo">
+    <img src="clippy.png" alt="Copy to clipboard" width="15">
+</button>
+
+<table id="myTable" style="width:100%" border="1">
+  <thead>
+	  <tr>
+		<th>Firstname</th>
+		<th>Lastname</th> 
+		<th>Age</th>
+	  </tr>
+  </thead>
+  <tbody>
+	  <tr class="rows">
+		<td>Jill</td>
+		<td>Smith</td> 
+		<td>50</td>
+	  </tr>
+	  <tr class="rows">
+		<td>Eve</td>
+		<td>Jackson</td> 
+		<td>94</td>
+	  </tr>
+  </tbody>
+</table>
+</body>
+</html>
